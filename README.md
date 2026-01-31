@@ -1,7 +1,7 @@
 <!-- ======================= LIFE LOGGER README ======================= -->
 <div align="center">
 
-<img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="120" alt="Life Logger Logo"/>
+<img src="https://github.com/naborajs.png" width="120" alt="Life Logger Logo"/>
 
 <h1>🧠 LIFE LOGGER — Personal Data Operating System</h1>
 
