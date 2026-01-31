@@ -1,0 +1,4 @@
+.env
+buffer.txt
+venv/
+__pycache__/
