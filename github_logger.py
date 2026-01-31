@@ -11,6 +11,8 @@ Responsibilities:
 ✔ Use EVENT timestamps (not system time)
 ✔ Prevent duplicate headers
 ✔ Prevent data loss
+✔ Human-readable Markdown
+✔ AI-friendly TXT logs
 """
 
 from github import Github
@@ -31,29 +33,64 @@ FILE_MAP = {
 
 
 # -----------------------------------------
+# TIME FORMATTER (HUMAN FRIENDLY)
+# -----------------------------------------
+
+def human_time(iso_timestamp: str):
+    """
+    Converts ISO timestamp into beautiful human-readable time.
+
+    Example:
+    Saturday, 31 January 2026 | 04:42 PM
+    """
+
+    dt = datetime.fromisoformat(iso_timestamp)
+
+    readable = dt.strftime("%A, %d %B %Y | %I:%M %p")
+    header = dt.strftime("## 📅 %d %B %Y (%A)")
+
+    return header, readable
+
+
+# -----------------------------------------
 # MARKDOWN FORMATTER
 # -----------------------------------------
 
 def format_markdown(category, timestamp, message):
     """
     Converts raw log into human-readable markdown.
-    Uses the LOG timestamp — never datetime.now()
+    ALWAYS uses the event timestamp.
     """
 
-    date_obj = datetime.fromisoformat(timestamp)
-    date_header = date_obj.strftime("## 📅 %B %d, %Y")
+    date_header, readable_time = human_time(timestamp)
 
     if category == "DAILY":
-        md_line = f"- {timestamp} | {message}\n"
+
+        md_line = (
+            f"🕒 **{readable_time}**\n"
+            f"- {message}\n\n"
+        )
 
     elif category == "ACHIEVEMENT":
-        md_line = f"🏆 **{timestamp}**\n\n{message}\n\n"
+
+        md_line = (
+            f"🏆 **Achievement — {readable_time}**\n\n"
+            f"{message}\n\n"
+        )
 
     elif category == "FAILURE":
-        md_line = f"⚠️ **{timestamp}**\n\n{message}\n\n"
+
+        md_line = (
+            f"⚠️ **Failure — {readable_time}**\n\n"
+            f"{message}\n\n"
+        )
 
     else:
-        md_line = f"- {timestamp} | {message}\n"
+
+        md_line = (
+            f"🕒 **{readable_time}**\n"
+            f"- {message}\n\n"
+        )
 
     return date_header, md_line
 
@@ -65,13 +102,14 @@ def format_markdown(category, timestamp, message):
 def update_file(repo, file_path, content, commit_msg):
     """
     Safely updates OR creates a GitHub file.
-    Returns existing content for header checks.
     """
 
     try:
+
         file = repo.get_contents(file_path, ref=GITHUB_BRANCH)
 
         existing = file.decoded_content.decode()
+
         updated = existing + content
 
         repo.update_file(
@@ -86,6 +124,7 @@ def update_file(repo, file_path, content, commit_msg):
 
     except Exception:
         # File doesn't exist yet
+
         repo.create_file(
             path=file_path,
             message=commit_msg,
@@ -106,7 +145,7 @@ def commit_buffer():
 
     if not content.strip():
         print("🟡 No logs to commit.")
-        return 0   # return count for bot notification
+        return 0
 
     try:
 
@@ -122,10 +161,19 @@ def commit_buffer():
             "FAILURE": [],
         }
 
+        # ---------------------------------
+        # PARSE BUFFER
+        # ---------------------------------
+
         for line in lines:
 
             try:
                 timestamp, category, message = line.split(" || ", 2)
+
+                if category not in grouped_logs:
+                    print("⚠️ Unknown category:", category)
+                    continue
+
                 grouped_logs[category].append((timestamp, message))
 
             except ValueError:
@@ -147,7 +195,7 @@ def commit_buffer():
             md_content = ""
             txt_content = ""
 
-            # Get existing markdown ONCE
+            # Read existing markdown once
             try:
                 file = repo.get_contents(md_file, ref=GITHUB_BRANCH)
                 existing_md = file.decoded_content.decode()
@@ -170,6 +218,8 @@ def commit_buffer():
                     md_content += f"\n\n{date_header}\n\n"
 
                 md_content += md_line
+
+                # AI-friendly TXT (DO NOT beautify)
                 txt_content += f"{timestamp} || {category} || {message}\n"
 
             entry_count = len(logs)
@@ -190,7 +240,10 @@ def commit_buffer():
             update_file(repo, md_file, md_content, md_commit_msg)
             update_file(repo, txt_file, txt_content, txt_commit_msg)
 
-        # 🔥 CLEAR ONLY AFTER SUCCESS
+        # ---------------------------------
+        # CLEAR BUFFER ONLY AFTER SUCCESS
+        # ---------------------------------
+
         clear_buffer()
 
         print(f"✅ Smart commit successful. ({total_entries} entries)")
